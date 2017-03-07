@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Isomorphic Strings</title>
+</head>
+<body>
+<p>
+    Given two strings s and t, determine if they are isomorphic.
+    <br/>
+    Two strings are isomorphic if the characters in s can be replaced to get t.
+    <br/>
+    All occurrences of a character must be replaced with another character while preserving the order of characters. No
+    two characters may map to the same character but a character may map to itself.
+    <br/>
+    For example,
+    Given "egg", "add", return true.
+    <br/>
+    Given "foo", "bar", return false.
+    <br/>
+    Given "paper", "title", return true.
+    <br/>
+    Note:
+    You may assume both s and t have the same length.
+    <br/>
+    Subscribe to see which companies asked this question.
+</p>
+<p>
+    给定两个字符串s和t，判断它们是否是同构的。
+    <br/>
+    如果字符串s可以通过字符替换的方式得到字符串t，则称s和t是同构的。
+    <br/>
+    字符的每一次出现都必须被其对应字符所替换，同时还需要保证原始顺序不发生改变。两个字符不能映射到同一个字符，但是字符可以映射到其本身。
+    <br/>
+    测试样例如题目描述。
+    <br/>
+    可以假设s和t等长。
+</p>
+<script>
+    /**
+     * 是否是同构
+     * @param s
+     * @param t
+     * @return {boolean}
+     */
+    function isIsomorphic(s, t) {
+        if (s.length !== t.length) {
+            return false;
+        }
+        var mapA = [], mapB = [];   // 用来放字符串的每个字母
+        var arrA = [], arrB = [];   // 用来记录字符串的每个字母在map数组中的位置
+        var i;
+        for (i = 0; i < s.length; i++) {
+            if (mapA.indexOf(s[i]) === -1) {
+                mapA.push(s[i]);
+            }
+            arrA[i] = mapA.indexOf(s[i]);
+        }
+        for (i = 0; i < t.length; i++) {
+            if (mapB.indexOf(t[i]) === -1) {
+                mapB.push(t[i]);
+            }
+            arrB[i] = mapB.indexOf(t[i]);
+        }
+        console.log('mapA = ' + JSON.stringify(mapA));
+        console.log('arrA = ' + JSON.stringify(arrA));
+        console.log('mapB = ' + JSON.stringify(mapB));
+        console.log('arrB = ' + JSON.stringify(arrB));
+
+        /**
+         * 判断数组是否相等（简单数组）
+         * @param arrA
+         * @param arrB
+         */
+        function isArrayEqual(arrA, arrB) {
+            return JSON.stringify(arrA) === JSON.stringify(arrB);
+        }
+
+        // 判断arrA和arrB是否相等
+        return isArrayEqual(arrA, arrB);
+    }
+
+    var a = 'egg';
+    var b = 'add';
+    console.log(isIsomorphic(a, b));
+
+</script>
+</body>
+</html>
